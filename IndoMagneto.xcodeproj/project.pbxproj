@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E751F9D1A44E64C00D0A2BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E751F9C1A44E64C00D0A2BB /* AppDelegate.swift */; };
+		5E751F9F1A44E64C00D0A2BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E751F9E1A44E64C00D0A2BB /* ViewController.swift */; };
+		5E751FA21A44E64C00D0A2BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E751FA01A44E64C00D0A2BB /* Main.storyboard */; };
+		5E751FA41A44E64C00D0A2BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E751FA31A44E64C00D0A2BB /* Images.xcassets */; };
+		5E751FA71A44E64C00D0A2BB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E751FA51A44E64C00D0A2BB /* LaunchScreen.xib */; };
+		5E751FB31A44E64C00D0A2BB /* IndoMagnetoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E751FB21A44E64C00D0A2BB /* IndoMagnetoTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5E751FAD1A44E64C00D0A2BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E751F8F1A44E64C00D0A2BB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E751F961A44E64C00D0A2BB;
+			remoteInfo = IndoMagneto;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5E751F971A44E64C00D0A2BB /* IndoMagneto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndoMagneto.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E751F9B1A44E64C00D0A2BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E751F9C1A44E64C00D0A2BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E751F9E1A44E64C00D0A2BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5E751FA11A44E64C00D0A2BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5E751FA31A44E64C00D0A2BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5E751FA61A44E64C00D0A2BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		5E751FAC1A44E64C00D0A2BB /* IndoMagnetoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IndoMagnetoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E751FB11A44E64C00D0A2BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E751FB21A44E64C00D0A2BB /* IndoMagnetoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoMagnetoTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E751F941A44E64C00D0A2BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E751FA91A44E64C00D0A2BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E751F8E1A44E64C00D0A2BB = {
+			isa = PBXGroup;
+			children = (
+				5E751F991A44E64C00D0A2BB /* IndoMagneto */,
+				5E751FAF1A44E64C00D0A2BB /* IndoMagnetoTests */,
+				5E751F981A44E64C00D0A2BB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5E751F981A44E64C00D0A2BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E751F971A44E64C00D0A2BB /* IndoMagneto.app */,
+				5E751FAC1A44E64C00D0A2BB /* IndoMagnetoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E751F991A44E64C00D0A2BB /* IndoMagneto */ = {
+			isa = PBXGroup;
+			children = (
+				5E751F9C1A44E64C00D0A2BB /* AppDelegate.swift */,
+				5E751F9E1A44E64C00D0A2BB /* ViewController.swift */,
+				5E751FA01A44E64C00D0A2BB /* Main.storyboard */,
+				5E751FA31A44E64C00D0A2BB /* Images.xcassets */,
+				5E751FA51A44E64C00D0A2BB /* LaunchScreen.xib */,
+				5E751F9A1A44E64C00D0A2BB /* Supporting Files */,
+			);
+			path = IndoMagneto;
+			sourceTree = "<group>";
+		};
+		5E751F9A1A44E64C00D0A2BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5E751F9B1A44E64C00D0A2BB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5E751FAF1A44E64C00D0A2BB /* IndoMagnetoTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E751FB21A44E64C00D0A2BB /* IndoMagnetoTests.swift */,
+				5E751FB01A44E64C00D0A2BB /* Supporting Files */,
+			);
+			path = IndoMagnetoTests;
+			sourceTree = "<group>";
+		};
+		5E751FB01A44E64C00D0A2BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5E751FB11A44E64C00D0A2BB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E751F961A44E64C00D0A2BB /* IndoMagneto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E751FB61A44E64C00D0A2BB /* Build configuration list for PBXNativeTarget "IndoMagneto" */;
+			buildPhases = (
+				5E751F931A44E64C00D0A2BB /* Sources */,
+				5E751F941A44E64C00D0A2BB /* Frameworks */,
+				5E751F951A44E64C00D0A2BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IndoMagneto;
+			productName = IndoMagneto;
+			productReference = 5E751F971A44E64C00D0A2BB /* IndoMagneto.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5E751FAB1A44E64C00D0A2BB /* IndoMagnetoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E751FB91A44E64C00D0A2BB /* Build configuration list for PBXNativeTarget "IndoMagnetoTests" */;
+			buildPhases = (
+				5E751FA81A44E64C00D0A2BB /* Sources */,
+				5E751FA91A44E64C00D0A2BB /* Frameworks */,
+				5E751FAA1A44E64C00D0A2BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E751FAE1A44E64C00D0A2BB /* PBXTargetDependency */,
+			);
+			name = IndoMagnetoTests;
+			productName = IndoMagnetoTests;
+			productReference = 5E751FAC1A44E64C00D0A2BB /* IndoMagnetoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E751F8F1A44E64C00D0A2BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Alexander Steinbrecher";
+				TargetAttributes = {
+					5E751F961A44E64C00D0A2BB = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					5E751FAB1A44E64C00D0A2BB = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 5E751F961A44E64C00D0A2BB;
+					};
+				};
+			};
+			buildConfigurationList = 5E751F921A44E64C00D0A2BB /* Build configuration list for PBXProject "IndoMagneto" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5E751F8E1A44E64C00D0A2BB;
+			productRefGroup = 5E751F981A44E64C00D0A2BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E751F961A44E64C00D0A2BB /* IndoMagneto */,
+				5E751FAB1A44E64C00D0A2BB /* IndoMagnetoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5E751F951A44E64C00D0A2BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E751FA21A44E64C00D0A2BB /* Main.storyboard in Resources */,
+				5E751FA71A44E64C00D0A2BB /* LaunchScreen.xib in Resources */,
+				5E751FA41A44E64C00D0A2BB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E751FAA1A44E64C00D0A2BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E751F931A44E64C00D0A2BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E751F9F1A44E64C00D0A2BB /* ViewController.swift in Sources */,
+				5E751F9D1A44E64C00D0A2BB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E751FA81A44E64C00D0A2BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E751FB31A44E64C00D0A2BB /* IndoMagnetoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5E751FAE1A44E64C00D0A2BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E751F961A44E64C00D0A2BB /* IndoMagneto */;
+			targetProxy = 5E751FAD1A44E64C00D0A2BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5E751FA01A44E64C00D0A2BB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E751FA11A44E64C00D0A2BB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5E751FA51A44E64C00D0A2BB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E751FA61A44E64C00D0A2BB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5E751FB41A44E64C00D0A2BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5E751FB51A44E64C00D0A2BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E751FB71A44E64C00D0A2BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IndoMagneto/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5E751FB81A44E64C00D0A2BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IndoMagneto/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		5E751FBA1A44E64C00D0A2BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = IndoMagnetoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IndoMagneto.app/IndoMagneto";
+			};
+			name = Debug;
+		};
+		5E751FBB1A44E64C00D0A2BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = IndoMagnetoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IndoMagneto.app/IndoMagneto";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E751F921A44E64C00D0A2BB /* Build configuration list for PBXProject "IndoMagneto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E751FB41A44E64C00D0A2BB /* Debug */,
+				5E751FB51A44E64C00D0A2BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E751FB61A44E64C00D0A2BB /* Build configuration list for PBXNativeTarget "IndoMagneto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E751FB71A44E64C00D0A2BB /* Debug */,
+				5E751FB81A44E64C00D0A2BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5E751FB91A44E64C00D0A2BB /* Build configuration list for PBXNativeTarget "IndoMagnetoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E751FBA1A44E64C00D0A2BB /* Debug */,
+				5E751FBB1A44E64C00D0A2BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5E751F8F1A44E64C00D0A2BB /* Project object */;
+}
