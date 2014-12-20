@@ -9,7 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBAction func pressStart(sender: AnyObject) {
+        println("pressStart")
+    }
+    
+    @IBAction func pressStop(sender: AnyObject) {
+        println("pressStop")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
