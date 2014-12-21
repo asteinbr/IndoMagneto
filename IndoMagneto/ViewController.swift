@@ -110,6 +110,9 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     func pressStop(sender: AnyObject) {
         println("pressStop")
         isStarted = false
+        
+        motionManager.stopAccelerometerUpdates()
+        motionManager.stopMagnetometerUpdates()
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
