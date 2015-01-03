@@ -12,13 +12,14 @@ import CoreMotion
 
 extension Double {
     func toString() -> String {
-        return String(format: "%.3f", self)
+        return String(format: "%.2f", self)
     }
 }
 
 class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate {
     var isStarted = false
-    lazy var motionManager = CMMotionManager()
+    var motionManager = CMMotionManager()
+    var deviceMotion = CMDeviceMotion()
     
     @IBOutlet weak var filenameLabel: UITextField!
     
@@ -30,62 +31,148 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     @IBOutlet weak var labelAccelerometerY: UILabel!
     @IBOutlet weak var labelAccelerometerZ: UILabel!
     
+    @IBOutlet weak var labelGyroX: UILabel!
+    @IBOutlet weak var labelGyroY: UILabel!
+    @IBOutlet weak var labelGyroZ: UILabel!
+    
+    @IBOutlet weak var labelYaw: UILabel!
+    @IBOutlet weak var labelPitch: UILabel!
+    @IBOutlet weak var labelRoll: UILabel!
+    
     var magnetX = 0.000
     var magnetY = 0.000
     var magnetZ = 0.000
     var accelerometerX = 0.000
     var accelerometerY = 0.000
     var accelerometerZ = 0.000
+    var magnet2X = 0.000
+    var magnet2Y = 0.000
+    var magnet2Z = 0.000
+    var gyroX = 0.000
+    var gyroY = 0.000
+    var gyroZ = 0.000
+    var attitudeYaw = 0.000
+    var attitudePitch = 0.000
+    var attitudeRoll = 0.000
+    
+    var data = ""
+    
+    func writeToInternalFile(tempData: String) {
+        data = data + tempData
+    }
     
     func startDataCollection() {
         
         // Motion Manager
         if isStarted {
-            if motionManager.accelerometerAvailable & motionManager.magnetometerAvailable {
+            if motionManager.accelerometerAvailable & motionManager.magnetometerAvailable & motionManager.gyroAvailable {
                 
                 // Accelerometer
+                motionManager.accelerometerUpdateInterval = 0.1
                 let queue = NSOperationQueue()
                 motionManager.startAccelerometerUpdatesToQueue(queue, withHandler: {(data: CMAccelerometerData!, error: NSError!) in
                     
                     let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
                     dispatch_async(dispatch_get_global_queue(priority, 0)) {
                         // do some task
-                        self.accelerometerX = (data.acceleration.x)*10
-                        self.accelerometerY = (data.acceleration.y)*10
-                        self.accelerometerZ = (data.acceleration.z)*10
+                        self.accelerometerX = (data.acceleration.x) * 9.81
+                        self.accelerometerY = (data.acceleration.y) * 9.81
+                        self.accelerometerZ = (data.acceleration.z) * 9.81
+                        
+                        var orientationData = "0.0,0.0,0.0\n"
+                        self.writeToInternalFile("ORIENTATION," + orientationData)
+                        
+                        var accelData = self.accelerometerX.toString() + "," + self.accelerometerY.toString() + "," + self.accelerometerZ.toString() + "\n"
+                        self.writeToInternalFile("ACCELEROMETER," + accelData)
                         
                         dispatch_async(dispatch_get_main_queue()) {
                             // update some UI
                             self.labelAccelerometerX.text = self.accelerometerX.toString()
                             self.labelAccelerometerY.text = self.accelerometerY.toString()
                             self.labelAccelerometerZ.text = self.accelerometerZ.toString()
-                        }
-                    }
+                        } // dispatch_async main_queue
+                    } // dispatch_async global_queue
                 })
                 
-                // Magnetometer
-                let queueMagnet = NSOperationQueue()
-                motionManager.startMagnetometerUpdatesToQueue(queueMagnet, withHandler: {(data: CMMagnetometerData!, error: NSError!) in
+                // Magnetometer Corrected
+                let queueMagnetCorrected = NSOperationQueue()
+                if motionManager.deviceMotionAvailable {
+                    motionManager.deviceMotionUpdateInterval = 0.1
+                    motionManager.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrameXArbitraryCorrectedZVertical, toQueue: queueMagnetCorrected, withHandler: {(data: CMDeviceMotion!, error: NSError!) in
+                        
+                        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                            // do some task
+                            self.magnetX = (data.magneticField.field.x)
+                            self.magnetY = (data.magneticField.field.y)
+                            self.magnetZ = (data.magneticField.field.z)
+                            
+                            var magnetData = self.magnetX.toString() + "," + self.magnetY.toString() + "," + self.magnetZ.toString() + "\n"
+                            self.writeToInternalFile("MAGNETOMETER," + magnetData)
+                            
+                            dispatch_async(dispatch_get_main_queue()) {
+                                // update some UI
+                                self.labelMagnetX.text = self.magnetX.toString()
+                                self.labelMagnetY.text = self.magnetY.toString()
+                                self.labelMagnetZ.text = self.magnetZ.toString()
+                            }
+                        } // dispatch_async
+                    }) // startDeviceMotionUpdatesToQueue
+                }
+                
+                // Gyroscope
+                motionManager.gyroUpdateInterval = 0.1
+                let queueGyro = NSOperationQueue()
+                motionManager.startGyroUpdatesToQueue(queueGyro, withHandler: {(data: CMGyroData!, error: NSError!) in
                     
                     let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
                     dispatch_async(dispatch_get_global_queue(priority, 0)) {
                         // do some task
-                        self.magnetX = (data.magneticField.x)
-                        self.magnetY = (data.magneticField.y)
-                        self.magnetZ = (data.magneticField.z)
+                        self.gyroX = (data.rotationRate.x)
+                        self.gyroY = (data.rotationRate.y)
+                        self.gyroZ = (data.rotationRate.z)
+                        
+                        var gyroData = self.gyroX.toString() + "," + self.gyroY.toString() + "," + self.gyroZ.toString() + "\n"
+                        self.writeToInternalFile("GYROSCOPE," + gyroData)
                         
                         dispatch_async(dispatch_get_main_queue()) {
                             // update some UI
-                            self.labelMagnetX.text = self.magnetX.toString()
-                            self.labelMagnetY.text = self.magnetY.toString()
-                            self.labelMagnetZ.text = self.magnetZ.toString()
-                        }
-                    }
-                    
+                            self.labelGyroX.text = self.gyroX.toString()
+                            self.labelGyroY.text = self.gyroY.toString()
+                            self.labelGyroZ.text = self.gyroZ.toString()
+                        } // dispatch_async main_queue
+                    } // dispatch_async global_queue
                 })
                 
+                // Orientation
+//                let queueOrientation = NSOperationQueue()
+//                if motionManager.deviceMotionAvailable {
+//                    motionManager.deviceMotionUpdateInterval = 0.1
+//                    motionManager.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrameXArbitraryCorrectedZVertical, toQueue: queueMagnetCorrected, withHandler: {(data: CMDeviceMotion!, error: NSError!) in
+//                        
+//                        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+//                        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+//                            // do some task
+//                            self.attitudeYaw   = (data.attitude.yaw)
+//                            self.attitudePitch = (data.attitude.pitch)
+//                            self.attitudeRoll  = (data.attitude.roll)
+//                            
+//                            //var magnetData = self.attitudeYaw.toString() + "," + self.attitudePitch.toString() + "," + self.attitudeRoll.toString() + "\n"
+//                            var magnetData = "0.0,0.0,0.0\n"
+//                            self.writeToInternalFile("ORIENTATION," + magnetData)
+//                            
+//                            dispatch_async(dispatch_get_main_queue()) {
+//                                // update some UI
+//                                self.labelYaw.text = self.attitudeYaw.toString()
+//                                self.labelPitch.text = self.attitudePitch.toString()
+//                                self.labelRoll.text = self.attitudeRoll.toString()
+//                            }
+//                        } // dispatch_async
+//                    }) // startDeviceMotionUpdatesToQueue
+//                }
+                
             } else {
-                println("Accelerometer and Magnetometer are not available.")
+                println("Accelerometer, Magnetometer or Gyroscope are not available.")
             }
         }
     }
@@ -95,9 +182,9 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
         isStarted = true
         var contentFilename = filenameLabel.text
         
-        println("Filename is: " + contentFilename)
+        println("filename: " + contentFilename)
         
-        if contentFilename.isEmpty {
+        if !contentFilename.isEmpty {
             println("filename is empty")
             let alertView = UIAlertView(title: "Missing filename", message: "An empty filename is not allowed.", delegate: self, cancelButtonTitle: "OK")
             alertView.alertViewStyle = .Default
@@ -113,8 +200,13 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
         
         motionManager.stopAccelerometerUpdates()
         motionManager.stopMagnetometerUpdates()
+        motionManager.stopDeviceMotionUpdates()
+        motionManager.stopGyroUpdates()
+        
+        println(data)
     }
     
+    // That after a press on Return the keyboard is disappearing
     func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
         textField.resignFirstResponder()
         
