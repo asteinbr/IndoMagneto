@@ -9,7 +9,6 @@
 import UIKit
 import CoreMotion
 
-
 extension Double {
     func toString() -> String {
         return String(format: "%.2f", self)
@@ -143,41 +142,22 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
                         } // dispatch_async main_queue
                     } // dispatch_async global_queue
                 })
-                
-                // Orientation
-//                let queueOrientation = NSOperationQueue()
-//                if motionManager.deviceMotionAvailable {
-//                    motionManager.deviceMotionUpdateInterval = 0.1
-//                    motionManager.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrameXArbitraryCorrectedZVertical, toQueue: queueMagnetCorrected, withHandler: {(data: CMDeviceMotion!, error: NSError!) in
-//                        
-//                        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-//                        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-//                            // do some task
-//                            self.attitudeYaw   = (data.attitude.yaw)
-//                            self.attitudePitch = (data.attitude.pitch)
-//                            self.attitudeRoll  = (data.attitude.roll)
-//                            
-//                            //var magnetData = self.attitudeYaw.toString() + "," + self.attitudePitch.toString() + "," + self.attitudeRoll.toString() + "\n"
-//                            var magnetData = "0.0,0.0,0.0\n"
-//                            self.writeToInternalFile("ORIENTATION," + magnetData)
-//                            
-//                            dispatch_async(dispatch_get_main_queue()) {
-//                                // update some UI
-//                                self.labelYaw.text = self.attitudeYaw.toString()
-//                                self.labelPitch.text = self.attitudePitch.toString()
-//                                self.labelRoll.text = self.attitudeRoll.toString()
-//                            }
-//                        } // dispatch_async
-//                    }) // startDeviceMotionUpdatesToQueue
-//                }
-                
             } else {
                 println("Accelerometer, Magnetometer or Gyroscope are not available.")
             }
         }
     }
     
+    func doHTTPStuff() {
+        let axu = FileUploader()
+        let myURL = NSURL.init(fileURLWithPath: "/Users/asteinbr/swiftTest")!
+        axu.nativeUpload(myURL)
+        
+    }
+    
     func pressStart(sender: AnyObject) {
+        doHTTPStuff()
+        
         println("pressStart")
         isStarted = true
         var contentFilename = filenameLabel.text
