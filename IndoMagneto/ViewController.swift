@@ -54,10 +54,40 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     var attitudePitch = 0.000
     var attitudeRoll = 0.000
     
+    var lastItem = "NEWFILE"
     var data = ""
     
-    func writeToInternalFile(tempData: String) {
-        data = data + tempData
+    func writeToInternalFile(currentData: String) {
+        if lastItem.hasPrefix("NEWFILE") {
+            if currentData.hasPrefix("ORIENTATION") {
+                data = data + currentData
+                lastItem = currentData
+            }
+        }
+        if lastItem.hasPrefix("ORIENTATION") {
+            if currentData.hasPrefix("ACCELEROMETER") {
+                data = data + currentData
+                lastItem = currentData
+            }
+        }
+        if lastItem.hasPrefix("ACCELEROMETER") {
+            if currentData.hasPrefix("MAGNETIC_FIELD") {
+                data = data + currentData
+                lastItem = currentData
+            }
+        }
+        if lastItem.hasPrefix("MAGNETIC_FIELD") {
+            if currentData.hasPrefix("GYROSCOPE") {
+                data = data + currentData
+                lastItem = currentData
+            }
+        }
+        if lastItem.hasPrefix("GYROSCOPE") {
+            if currentData.hasPrefix("ORIENTATION") {
+                data = data + currentData
+                lastItem = currentData
+            }
+        }
     }
     
     func startDataCollection() {
@@ -107,7 +137,7 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
                             self.magnetZ = (data.magneticField.field.z)
                             
                             var magnetData = self.magnetX.toString() + "," + self.magnetY.toString() + "," + self.magnetZ.toString() + "\n"
-                            self.writeToInternalFile("MAGNETOMETER," + magnetData)
+                            self.writeToInternalFile("MAGNETIC_FIELD," + magnetData)
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                 // update some UI
@@ -149,22 +179,17 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     }
     
     func doHTTPStuff() {
-        let axu = FileUploader()
-        let myURL = NSURL.init(fileURLWithPath: "/Users/asteinbr/swiftTest")!
-        axu.nativeUpload(myURL)
+        let fileUpload = FileUploader()
+        let fileName = filenameLabel.text + ".txt"
+        fileUpload.nativeUpload(fileName, data: data)
         
     }
     
     func pressStart(sender: AnyObject) {
-        doHTTPStuff()
-        
         println("pressStart")
         isStarted = true
-        var contentFilename = filenameLabel.text
         
-        println("filename: " + contentFilename)
-        
-        if !contentFilename.isEmpty {
+        if !filenameLabel.text.isEmpty {
             println("filename is empty")
             let alertView = UIAlertView(title: "Missing filename", message: "An empty filename is not allowed.", delegate: self, cancelButtonTitle: "OK")
             alertView.alertViewStyle = .Default
@@ -176,14 +201,20 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     
     func pressStop(sender: AnyObject) {
         println("pressStop")
-        isStarted = false
         
-        motionManager.stopAccelerometerUpdates()
-        motionManager.stopMagnetometerUpdates()
-        motionManager.stopDeviceMotionUpdates()
-        motionManager.stopGyroUpdates()
+        println(lastItem)
         
-        println(data)
+        while lastItem.hasPrefix("GYROSCOPE") {
+            println("orientation lastitem")
+            isStarted = false
+            
+            motionManager.stopAccelerometerUpdates()
+            motionManager.stopMagnetometerUpdates()
+            motionManager.stopDeviceMotionUpdates()
+            motionManager.stopGyroUpdates()
+            
+            doHTTPStuff()
+        }
     }
     
     // That after a press on Return the keyboard is disappearing
