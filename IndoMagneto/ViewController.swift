@@ -56,6 +56,7 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     
     var lastItem = "NEWFILE"
     var data = ""
+    var myStopTimer:NSTimer?
     
     func writeToInternalFile(currentData: String) {
         if lastItem.hasPrefix("NEWFILE") {
@@ -197,15 +198,26 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
         } else {
             startDataCollection()
         }
+        
     }
     
     func pressStop(sender: AnyObject) {
         println("pressStop")
         
-        println(lastItem)
+        startStopTimer()
         
-        while lastItem.hasPrefix("GYROSCOPE") {
-            println("orientation lastitem")
+    }
+    
+    func startStopTimer() {
+        myStopTimer = NSTimer(timeInterval: 0.01, target: self, selector: "doStopTimerTasks", userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(myStopTimer!, forMode: NSRunLoopCommonModes)
+    }
+    
+    func doStopTimerTasks() {
+        if lastItem.hasPrefix("GYROSCOPE") {
+            myStopTimer?.invalidate()
+            myStopTimer = nil
+            
             isStarted = false
             
             motionManager.stopAccelerometerUpdates()
