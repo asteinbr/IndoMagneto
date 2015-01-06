@@ -57,15 +57,15 @@ public class FileUploader {
             if let HTTPResponse = response as? NSHTTPURLResponse {
                 let statusCode = HTTPResponse.statusCode
                 if statusCode == 200 {
-                    println("Upload was successful.")
+                    NSNotificationCenter.defaultCenter().postNotificationName("IndoMagnetoNotificationKeySuccess", object: self)
                 } else {
-                    println("Upload wasn't successful.")
+                    NSNotificationCenter.defaultCenter().postNotificationName("IndoMagnetoNotificationKeyFailure", object: self)
                 }
             }
             
             if let apiError = error {
                 //aHandler?(obj: error, success: false)
-                println("An error occurred.")
+                NSNotificationCenter.defaultCenter().postNotificationName("IndoMagnetoNotificationKeyError", object: self)
             }
         })
     }

@@ -58,6 +58,7 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     var data = ""
     var myStopTimer:NSTimer?
     
+    
     func writeToInternalFile(currentData: String) {
         if lastItem.hasPrefix("NEWFILE") {
             if currentData.hasPrefix("ORIENTATION") {
@@ -92,7 +93,6 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     }
     
     func startDataCollection() {
-        
         // Motion Manager
         if isStarted {
             if motionManager.accelerometerAvailable & motionManager.magnetometerAvailable & motionManager.gyroAvailable {
@@ -179,18 +179,11 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
         }
     }
     
-    func doHTTPStuff() {
-        let fileUpload = FileUploader()
-        let fileName = filenameLabel.text + ".txt"
-        fileUpload.nativeUpload(fileName, data: data)
-        
-    }
-    
     func pressStart(sender: AnyObject) {
-        println("pressStart")
+        println("pressStart()")
         isStarted = true
         
-        if !filenameLabel.text.isEmpty {
+        if filenameLabel.text.isEmpty {
             println("filename is empty")
             let alertView = UIAlertView(title: "Missing filename", message: "An empty filename is not allowed.", delegate: self, cancelButtonTitle: "OK")
             alertView.alertViewStyle = .Default
@@ -198,26 +191,32 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
         } else {
             startDataCollection()
         }
-        
     }
     
     func pressStop(sender: AnyObject) {
-        println("pressStop")
+        println("pressStop()")
         
-        startStopTimer()
-        
+        if isStarted {
+            startStopTimer()
+        }
     }
     
     func startStopTimer() {
+        println("startStopTimer()")
+            
         myStopTimer = NSTimer(timeInterval: 0.01, target: self, selector: "doStopTimerTasks", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(myStopTimer!, forMode: NSRunLoopCommonModes)
     }
     
     func doStopTimerTasks() {
+        println("doStopTimerTasks()")
+        
         if lastItem.hasPrefix("GYROSCOPE") {
+            // Stop the timer
             myStopTimer?.invalidate()
             myStopTimer = nil
             
+            // Deactivate Sensor Data Collection
             isStarted = false
             
             motionManager.stopAccelerometerUpdates()
@@ -225,8 +224,35 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
             motionManager.stopDeviceMotionUpdates()
             motionManager.stopGyroUpdates()
             
-            doHTTPStuff()
+            doHTTPUpload()
+            
+            // clear data variable
+            data = ""
         }
+    }
+    
+    func doHTTPUpload() {
+        let fileUpload = FileUploader()
+        let fileName = filenameLabel.text + ".txt"
+        fileUpload.nativeUpload(fileName, data: data)
+    }
+    
+    func receiveTestNotificationSuccess() {
+        let alertView = UIAlertView(title: "Successful Upload", message: "The upload was successful.", delegate: self, cancelButtonTitle: "OK")
+        alertView.alertViewStyle = .Default
+        alertView.show()
+    }
+    
+    func receiveTestNotificationFailure() {
+        let alertView = UIAlertView(title: "Failed Upload", message: "The upload was not successful.", delegate: self, cancelButtonTitle: "OK")
+        alertView.alertViewStyle = .Default
+        alertView.show()
+    }
+    
+    func receiveTestNotificationError() {
+        let alertView = UIAlertView(title: "Error", message: "An error occured during the upload.", delegate: self, cancelButtonTitle: "OK")
+        alertView.alertViewStyle = .Default
+        alertView.show()
     }
     
     // That after a press on Return the keyboard is disappearing
@@ -241,6 +267,11 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
         
         // Do any additional setup after loading the view, typically from a nib.
         filenameLabel.delegate = self
+
+        //NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveTestNotificationSuccess", name: "IndoMagnetoNotificationKeySuccess", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveTestNotificationFailure", name: "IndoMagnetoNotificationKeyFailure", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveTestNotificationError", name: "IndoMagnetoNotificationKeyError", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
