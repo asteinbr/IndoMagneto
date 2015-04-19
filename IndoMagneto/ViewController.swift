@@ -95,7 +95,7 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
     func startDataCollection() {
         // Motion Manager
         if isStarted {
-            if motionManager.accelerometerAvailable & motionManager.magnetometerAvailable & motionManager.gyroAvailable {
+            if motionManager.accelerometerAvailable && motionManager.magnetometerAvailable && motionManager.gyroAvailable {
                 
                 // Accelerometer
                 motionManager.accelerometerUpdateInterval = 0.1
@@ -112,7 +112,9 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
                         var orientationData = "0.0,0.0,0.0\n"
                         self.writeToInternalFile("ORIENTATION," + orientationData)
                         
-                        var accelData = self.accelerometerX.toString() + "," + self.accelerometerY.toString() + "," + self.accelerometerZ.toString() + "\n"
+                        var accelData_temp1 = self.accelerometerX.toString() + "," + self.accelerometerY.toString() + ","
+                        var accelData_temp2 = self.accelerometerZ.toString() + "\n"
+                        var accelData = accelData_temp1 + accelData_temp2
                         self.writeToInternalFile("ACCELEROMETER," + accelData)
                         
                         dispatch_async(dispatch_get_main_queue()) {
@@ -128,7 +130,7 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
                 let queueMagnetCorrected = NSOperationQueue()
                 if motionManager.deviceMotionAvailable {
                     motionManager.deviceMotionUpdateInterval = 0.1
-                    motionManager.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrameXArbitraryCorrectedZVertical, toQueue: queueMagnetCorrected, withHandler: {(data: CMDeviceMotion!, error: NSError!) in
+                    motionManager.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrame.XArbitraryCorrectedZVertical, toQueue: queueMagnetCorrected, withHandler: {(data: CMDeviceMotion!, error: NSError!) in
                         
                         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
                         dispatch_async(dispatch_get_global_queue(priority, 0)) {
@@ -137,7 +139,9 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
                             self.magnetY = (data.magneticField.field.y)
                             self.magnetZ = (data.magneticField.field.z)
                             
-                            var magnetData = self.magnetX.toString() + "," + self.magnetY.toString() + "," + self.magnetZ.toString() + "\n"
+                            var magnetData_temp1 = self.magnetX.toString() + "," + self.magnetY.toString() + ","
+                            var magnetData_temp2 = self.magnetZ.toString() + "\n"
+                            var magnetData = magnetData_temp1 + magnetData_temp2
                             self.writeToInternalFile("MAGNETIC_FIELD," + magnetData)
                             
                             dispatch_async(dispatch_get_main_queue()) {
@@ -162,7 +166,9 @@ class ViewController: UIViewController, UIAlertViewDelegate, UITextFieldDelegate
                         self.gyroY = (data.rotationRate.y)
                         self.gyroZ = (data.rotationRate.z)
                         
-                        var gyroData = self.gyroX.toString() + "," + self.gyroY.toString() + "," + self.gyroZ.toString() + "\n"
+                        var gyroData_temp1 = self.gyroX.toString() + "," + self.gyroY.toString() + ","
+                        var gyroData_temp2 = self.gyroZ.toString() + "\n"
+                        var gyroData = gyroData_temp1 + gyroData_temp2
                         self.writeToInternalFile("GYROSCOPE," + gyroData)
                         
                         dispatch_async(dispatch_get_main_queue()) {
